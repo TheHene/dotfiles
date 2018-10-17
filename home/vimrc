@@ -23,8 +23,6 @@ set term=rxvt-unicode-256color
 set termencoding=utf-8
 set encoding=utf-8
 
-set mouse+=a
-
 " tmux knows the extended mouse mode
 set ttymouse=xterm2
 
@@ -54,14 +52,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'altercation/vim-colors-solarized'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'rking/ag.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-markdown'
-Plug 'kchmck/vim-coffee-script'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
@@ -70,7 +64,6 @@ Plug 'rizzatti/dash.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
 Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-unimpaired'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -106,14 +99,6 @@ highlight clear SignColumn      " SignColumn should match background
 highlight clear LineNr          " Current line number row will have same background color in relative mode
 highlight clear CursorLineNr    " Remove highlight color from current line number
 
-
-autocmd BufWritePre * :%s/\s\+$//e
-autocmd FileType ruby let &colorcolumn=80
-autocmd VimEnter * wincmd p
-" check if file has been changed
-autocmd WinEnter * checktime
-autocmd CursorHold * checktime
-
 map <C-F> :Ack<space>
 
 " copy paste
@@ -135,22 +120,11 @@ let g:gitgutter_sign_removed_first_line = '◄'
 let g:gitgutter_sign_modified_removed = '▼'
 
 let g:airline_powerline_fonts = 1
-"highlight GitGutterAdd guifg=green
-"highlight GitGutterChange guifg=yellow
-"highlight GitGutterDelete guifg=red
-"highlight GitGutterChangeDelete guifg=yellow
-
 
 hi NonText ctermbg=none
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi cursorline guibg=NONE ctermbg=NONE
-
-
-"NerdTree
-let g:nerdtree_tabs_open_on_new_tab = 1
-let g:nerdtree_tabs_autoclose = 1
-let NERDTreeShowHidden=1
 
 "Split direction
 set splitbelow
