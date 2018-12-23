@@ -40,11 +40,12 @@ module-bg   = #f00a0a0a
 selected-bg = #dc1a1a1a
 
 text-fg = #c8c8c8
-icon-fg = ${xcolor.color1}
+icon-fg = #b8bb26
 bar-fg  = ${xcolor.color3}
 
-red     = #996633
-orange  = #824517
+red     = #98971a
+orange  = #fe8019
+green   = #81AE04
 
 
 ;
@@ -77,7 +78,7 @@ background = ${color.base-bg}
 foreground = ${color.text-fg}
 
 ; Size of under-/overlines
-line-size = 1
+line-size = 3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -191,20 +192,20 @@ pin-workspaces = true
 strip-wsnumbers = true
 
 ws-icon-default = 缾
-ws-icon-0 = 1:一;
-ws-icon-1 = 2:二;ﲵ
-ws-icon-2 = 3:三;
-ws-icon-3 = 4:四;
-ws-icon-4 = 5:五;
-ws-icon-5 = 6:六;
-ws-icon-6 = 10:〇;ﱘ
+ws-icon-0 = 1:ﲵ
+ws-icon-1 = 2:
+ws-icon-2 = 3:
+ws-icon-3 = 4:
+ws-icon-4 = 5:
+ws-icon-5 = 6:
+ws-icon-6 = 10:ﱘ
 
 format = <label-state><label-mode>
 
 ; Active workspace on focused monitor
 label-focused = %{T2}%icon%%{T-}  %name%
-label-focused-background = ${color.selected-bg}
-label-focused-underline = ${xcolor.color1}
+label-focused-background = ${color.module-bg}
+label-focused-underline = ${color.green}
 label-focused-padding = ${layout.module-padding}
 
 ; Inactive workspace on any monitor
@@ -215,13 +216,13 @@ label-unfocused-padding = ${layout.module-padding}
 ; Active workspace on unfocused monitor
 label-visible = ${self.label-focused}
 label-visible-background = ${color.module-bg}
-label-visible-underline = ${xcolor.color1}
+label-visible-underline = ${color.green}
 label-visible-padding = ${layout.module-padding}
 
 ; Workspace with urgency hint set
 label-urgent = ${self.label-focused}
 label-urgent-background = ${color.module-bg}
-label-urgent-underline = ${color.red}
+label-urgent-underline = ${color.green}
 label-urgent-padding = ${layout.module-padding}
 
 label-mode-background = ${color.module-bg}
@@ -380,7 +381,7 @@ format-connected-prefix = 直
 label-connected = %essid%
 
 format-disconnected-prefix = 睊
-label-disconnected = オフ
+label-disconnected = 睊
 
 
 [module/eth]
@@ -414,9 +415,7 @@ type = internal/date
 inherit = generic-format-style
 interval = 1
 
-; Date format is "MM 月 DD 日", with a smaller font size used for
-; the spaces to achieve a tighter spacing using a monospaced font.
-date = %m%{T5} %{T-}%{F#404040}月%{F-}%{T5} %{T-}%d%{T5} %{T-}%{F#404040}日%{F-}
+date = %m%{T5}%{T-}%{F#b8bb26}M%{F-}%{T5} %{T-}%d%{T5}%{T-}%{F#b8bb26}D%{F-}
 date-alt = %A
 
 time = %H:%M
@@ -475,7 +474,7 @@ format-muted-prefix-font = ${layout.icon-font}
 format-muted-prefix-foreground = ${color.icon-fg}
 format-muted-prefix-padding-right = ${layout.icon-padding}
 
-label-muted = ミュート
+label-muted = Muted
 
 
 ;  __
