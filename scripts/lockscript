@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export DISPLAY=:0
+
+i3lock --blur=10 --clock --indicator --insidecolor=232C3100 --ringcolor=98971AFF  --line-uses-inside --keyhlcolor=A8A8A8FF --bshlcolor=A03B1EFF --insidevercolor=B8BB26FF --insidewrongcolor=CC241DFF --ringvercolor=9EA7A6FF --ringwrongcolor=3F4944FF --separatorcolor=2A5491FF --verifcolor=FFFFFFFF --wrongcolor=232C31FF --timecolor=928371FF --datecolor=928371FF 
+
+
