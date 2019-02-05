@@ -192,13 +192,13 @@ pin-workspaces = true
 strip-wsnumbers = true
 
 ws-icon-default = 缾
-ws-icon-0 = 1:ﲵ
-ws-icon-1 = 2:
-ws-icon-2 = 3:
-ws-icon-3 = 4:
-ws-icon-4 = 5:
-ws-icon-5 = 6:
-ws-icon-6 = 10:ﱘ
+ws-icon-0 = 1;ﲵ
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 10;ﱘ
 
 format = <label-state><label-mode>
 
@@ -415,7 +415,7 @@ type = internal/date
 inherit = generic-format-style
 interval = 1
 
-date = %m%{T5}%{T-}%{F#b8bb26}M%{F-}%{T5} %{T-}%d%{T5}%{T-}%{F#b8bb26}D%{F-}
+date =  %d%{T5}%{T-}%{F#b8bb26}-%{F-}%{T-}%m%{T5}%{T-}%{F#b8bb26}-%{F-}%{T5}%{T-}%y%{T5}%{T-}%{F#b8bb26}%{F-}
 date-alt = %A
 
 time = %H:%M

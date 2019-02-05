@@ -13,11 +13,19 @@ set backspace=indent,eol,start    " backspace through everything in insert mode
 set hlsearch                      " activate search result highlighting
 set wildignore+=tags,doc,tmp,log
 set number
-set nocompatible      " Do not be compatible with Vi - be iMproved
 set laststatus=2      " Always show status bar
 
 "set backupdir^=~/.vim/_backup//    " where to put backup files.
 "set directory^=~/.vim/_temp//      " where to put swap files.
+
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
 
 set t_Co=256
 set term=rxvt-unicode-256color
@@ -49,28 +57,33 @@ let g:loaded_netrwPlugin = 0
 " original repos on GitHub
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'
+"theme/color
+Plug 'morhetz/gruvbox'
 Plug 'srcery-colors/srcery-vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plug 'scrooloose/syntastic'
-Plug 'mhinz/vim-signify'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf'
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Valloric/YouCompleteMe'
-Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'morhetz/gruvbox'
+"autocomplete
+Plug 'davidhalter/jedi-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ervandew/supertab'
+"movment
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-unimpaired'
+"git
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+"randome
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'bronson/vim-trailing-whitespace'
 
-" Initialize plugin system
+"Initialize plugin system
 call plug#end()
 
 filetype plugin indent on
@@ -81,7 +94,6 @@ set encoding=utf-8
 colorscheme gruvbox
 set background=dark
 
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
