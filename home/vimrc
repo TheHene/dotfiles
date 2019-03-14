@@ -14,6 +14,7 @@ set hlsearch                      " activate search result highlighting
 set wildignore+=tags,doc,tmp,log
 set number
 set laststatus=2      " Always show status bar
+set colorcolumn=110
 
 "set backupdir^=~/.vim/_backup//    " where to put backup files.
 "set directory^=~/.vim/_temp//      " where to put swap files.
@@ -30,7 +31,6 @@ noremap! <Right> <Esc>
 set t_Co=256
 set term=rxvt-unicode-256color
 set termencoding=utf-8
-set encoding=utf-8
 
 " tmux knows the extended mouse mode
 set ttymouse=xterm2
@@ -64,10 +64,10 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "autocomplete
-Plug 'davidhalter/jedi-vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
-"movment
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+"movement
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
@@ -82,6 +82,8 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 "Initialize plugin system
 call plug#end()
@@ -133,3 +135,8 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter,Winleave * set norelativenumber
 augroup END
+
+" YCM Options
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+set completeopt-=preview
+let g:ycm_key_list_stop_completion = ['<TAB>']
