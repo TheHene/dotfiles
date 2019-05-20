@@ -16,24 +16,33 @@ set number
 set laststatus=2      " Always show status bar
 set colorcolumn=110
 
+if has('python')
+  set pyx=2
+elseif has('python3')
+  set pyx=3
+endif
+
 "set backupdir^=~/.vim/_backup//    " where to put backup files.
 "set directory^=~/.vim/_temp//      " where to put swap files.
 
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
+"noremap  <Up> ""
+"noremap! <Up> <Esc>
+"noremap  <Down> ""
+"noremap! <Down> <Esc>
+"noremap  <Left> ""
+"noremap! <Left> <Esc>
+"noremap  <Right> ""
+"noremap! <Right> <Esc>
 
 set t_Co=256
-set term=rxvt-unicode-256color
 set termencoding=utf-8
 
-" tmux knows the extended mouse mode
-set ttymouse=xterm2
+if !has('nvim')
+  set term=rxvt-unicode-256color
+  " tmux knows the extended mouse mode
+  set ttymouse=xterm2
+  let g:loaded_python3_provider=1
+endif
 
 " no freakin' end of line
 set noeol
@@ -63,27 +72,25 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'posva/vim-vue'
 "autocomplete
-Plug 'jiangmiao/auto-pairs'
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 "movement
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-unimpaired'
 "git
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 "randome
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
+"Plug 'tpope/vim-endwise'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'honza/vim-snippets'
 
 "Initialize plugin system
 call plug#end()
@@ -105,7 +112,7 @@ set cursorline                  " Highlight current line
 map <C-F> :Ack<space>
 
 " copy paste
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 syntax on
 
@@ -136,7 +143,40 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,Winleave * set norelativenumber
 augroup END
 
-" YCM Options
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-set completeopt-=preview
-let g:ycm_key_list_stop_completion = ['<TAB>']
+"coc.vim
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+" if you want to disable auto detect, comment out those two lines
+"let g:airline#extensions#disable_rtp_load = 1
+"let g:airline_extensions = ['branch', 'hunks', 'coc']
+
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+"coc snippets
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+"
+"" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+"
+"" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-k>'
+"
+"" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-j>'
+"
+"" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
