@@ -2,7 +2,7 @@ set nocompatible              " be iMproved
 filetype off                  " required!
 
 " Custom settings
-let mapleader="_"
+let mapleader="s"
 
 set nowrap                        " don't wrap lines
 set tabstop=2                     " a tab is two spaces
@@ -14,35 +14,18 @@ set hlsearch                      " activate search result highlighting
 set wildignore+=tags,doc,tmp,log
 set number
 set laststatus=2      " Always show status bar
-set colorcolumn=110
+set colorcolumn=99
+set hidden
 
-if has('python')
-  set pyx=2
-elseif has('python3')
-  set pyx=3
-endif
-
-"set backupdir^=~/.vim/_backup//    " where to put backup files.
-"set directory^=~/.vim/_temp//      " where to put swap files.
-
-"noremap  <Up> ""
-"noremap! <Up> <Esc>
-"noremap  <Down> ""
-"noremap! <Down> <Esc>
-"noremap  <Left> ""
-"noremap! <Left> <Esc>
-"noremap  <Right> ""
-"noremap! <Right> <Esc>
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 set t_Co=256
 set termencoding=utf-8
-
-if !has('nvim')
-  set term=rxvt-unicode-256color
-  " tmux knows the extended mouse mode
-  set ttymouse=xterm2
-  let g:loaded_python3_provider=1
-endif
 
 " no freakin' end of line
 set noeol
@@ -52,29 +35,21 @@ if empty(glob("~/.vim/autoload/plug.vim"))
   execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_balloons = 1
-let g:syntastic_check_on_open=0
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:loaded_netrw       = 0
-let g:loaded_netrwPlugin = 0
-
-
-
 " My bundles here:
 " original repos on GitHub
 call plug#begin('~/.vim/plugged')
 
 "theme/color
 Plug 'morhetz/gruvbox'
-Plug 'srcery-colors/srcery-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'posva/vim-vue'
+Plug 'leafgarland/typescript-vim'
+Plug 'cespare/vim-toml'
 "autocomplete
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jiangmiao/auto-pairs'
 "movement
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
@@ -83,14 +58,16 @@ Plug 'mileszs/ack.vim'
 "git
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
+Plug 'junegunn/gv.vim'
 "randome
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
-"Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'honza/vim-snippets'
+Plug 'MuAnsari96/vimify'
+Plug 'rust-lang/rustfmt'
 
 "Initialize plugin system
 call plug#end()
@@ -109,14 +86,14 @@ set guioptions-=L  "remove left-hand scroll bar
 
 set cursorline                  " Highlight current line
 
-map <C-F> :Ack<space>
+map <C-t> :Ack<space>
 
 " copy paste
 set clipboard=unnamedplus
 
 syntax on
 
-map <C-t> :FZF<CR>
+map <C-f> :FZF<CR>
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -133,9 +110,12 @@ set splitright
 
 "ignores case sensitivitie
 set ignorecase
+let g:EasyMotion_smartcase = 1
 
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <leader>f <Plug>(easymotion-overwin-f2)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
 
 augroup numbertoggle
   autocmd!
@@ -158,12 +138,6 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-" if you want to disable auto detect, comment out those two lines
-"let g:airline#extensions#disable_rtp_load = 1
-"let g:airline_extensions = ['branch', 'hunks', 'coc']
-
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "coc snippets
 " Use <C-l> for trigger snippet expand.
@@ -180,3 +154,36 @@ let g:coc_snippet_prev = '<c-j>'
 "
 "" Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+"switch buffers
+nnoremap <leader>n :bnext<cr>
+nnoremap <leader>b :bprev<CR>
+nnoremap <C-s> :SpToggle <CR>
+
+"Nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+let g:rustfmt_autosave = 1

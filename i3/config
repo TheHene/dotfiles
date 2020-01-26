@@ -2,7 +2,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4
+set $mod Mod1
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -41,7 +41,7 @@ bindsym $mod+d exec rofi -show run -theme material
 bindsym $mod+z exec --no-startup-id morc_menu
 
 #xrandr
-exec_always xrandr --auto --output HDMI-0  --primary  --left-of DisplayPort-1
+exec_always xrandr --auto --output DisplayPort-1  --primary  --right-of HDMI-0
 
 
 ################################################################################################
@@ -104,7 +104,9 @@ workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
-# split orientation
+# split ndsym $mod+v split 
+bindsym $mod+o split h;exec notify-send 'tile horizontally'
+bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
@@ -322,6 +324,11 @@ exec_always --no-startup-id fix_xcursor
 
 #start Polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybar
+
+#nabi
+#exec_always --no-startup-id nabi
+#exec --no-startup-id fcitx -d
+exec --no-startup-id ibus-daemon -drx
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
