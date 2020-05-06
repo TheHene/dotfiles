@@ -47,6 +47,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'posva/vim-vue'
 Plug 'leafgarland/typescript-vim'
 Plug 'cespare/vim-toml'
+Plug 'norcalli/nvim-colorizer.lua'
 "autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs'
@@ -65,9 +66,9 @@ Plug 'tpope/vim-endwise'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
-Plug 'honza/vim-snippets'
 Plug 'MuAnsari96/vimify'
 Plug 'rust-lang/rustfmt'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 "Initialize plugin system
 call plug#end()
@@ -180,6 +181,7 @@ endfunction
 "switch buffers
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>b :bprev<CR>
+nnoremap <leader>c :bd<CR>
 nnoremap <C-s> :SpToggle <CR>
 
 "Nerdtree
@@ -187,3 +189,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 let g:rustfmt_autosave = 1
+
+"ranger config
+nnoremap <leader>re :RnvimrToggle<CR>

@@ -40,8 +40,12 @@ bindsym $mod+d exec rofi -show run -theme material
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
+#Set Monitors
+set $monL HDMI2
+set $monR DP1
+
 #xrandr
-exec_always xrandr --auto --output DisplayPort-1  --primary  --right-of HDMI-0
+exec_always xrandr --auto --output $monR --primary  --right-of $monL
 
 
 ################################################################################################
@@ -63,6 +67,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec $BROWSER
 bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F4 exec --no-startup-id ~/Programms/DiscordPTB/./DiscordPTB
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
@@ -139,10 +144,6 @@ bindsym $mod+minus scratchpad show
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
-
-#Set Monitors
-set $monL HDMI-0
-set $monR DisplayPort-1
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
