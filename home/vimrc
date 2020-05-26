@@ -67,7 +67,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'MuAnsari96/vimify'
-Plug 'rust-lang/rustfmt'
+Plug 'rust-lang/rust.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 "Initialize plugin system

@@ -41,8 +41,8 @@ bindsym $mod+d exec rofi -show run -theme material
 bindsym $mod+z exec --no-startup-id morc_menu
 
 #Set Monitors
-set $monL HDMI2
-set $monR DP1
+set $monL HDMI-A-0
+set $monR DisplayPort-1
 
 #xrandr
 exec_always xrandr --auto --output $monR --primary  --right-of $monL
