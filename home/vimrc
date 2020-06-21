@@ -2,7 +2,7 @@ set nocompatible              " be iMproved
 filetype off                  " required!
 
 " Custom settings
-let mapleader="s"
+let mapleader=","
 
 set nowrap                        " don't wrap lines
 set tabstop=2                     " a tab is two spaces
@@ -50,11 +50,10 @@ Plug 'cespare/vim-toml'
 Plug 'norcalli/nvim-colorizer.lua'
 "autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jiangmiao/auto-pairs'
 "movement
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 "git
 Plug 'tpope/vim-fugitive'
@@ -115,8 +114,6 @@ let g:EasyMotion_smartcase = 1
 
 " s{char}{char} to move to {char}{char}
 nmap <leader>f <Plug>(easymotion-overwin-f2)
-nmap <leader>j <Plug>(easymotion-j)
-nmap <leader>k <Plug>(easymotion-k)
 
 augroup numbertoggle
   autocmd!
@@ -182,6 +179,8 @@ endfunction
 nnoremap <leader>n :bnext<cr>
 nnoremap <leader>b :bprev<CR>
 nnoremap <leader>c :bd<CR>
+
+"Spotfiy toggle music
 nnoremap <C-s> :SpToggle <CR>
 
 "Nerdtree
@@ -192,3 +191,7 @@ let g:rustfmt_autosave = 1
 
 "ranger config
 nnoremap <leader>re :RnvimrToggle<CR>
+
+"Use CapsLock to exit
+au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'

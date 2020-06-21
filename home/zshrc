@@ -21,3 +21,5 @@ source $ZSH/oh-my-zsh.sh
 export PS1
 export C_INCLUDE_PATH=~/Repros/Unlucky/UnluckyOpenGL/includes:$C_INCLUDE_PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+alias vim="nvim"
