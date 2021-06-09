@@ -53,6 +53,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "movement
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 "git
@@ -60,15 +61,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/gv.vim'
 "randome
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-endwise'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'MuAnsari96/vimify'
 Plug 'rust-lang/rust.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-
+Plug 'kevinhwang91/rnvimr'
 "Initialize plugin system
 call plug#end()
 
@@ -92,8 +89,6 @@ map <C-t> :Ack<space>
 set clipboard=unnamedplus
 
 syntax on
-
-map <C-f> :FZF<CR>
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -176,8 +171,8 @@ function! s:show_documentation()
 endfunction
 
 "switch buffers
-nnoremap <leader>n :bnext<cr>
-nnoremap <leader>b :bprev<CR>
+nnoremap <leader>e :bnext<cr>
+nnoremap <leader>w :bprev<CR>
 nnoremap <leader>c :bd<CR>
 
 "Spotfiy toggle music
@@ -192,6 +187,17 @@ let g:rustfmt_autosave = 1
 "ranger config
 nnoremap <leader>re :RnvimrToggle<CR>
 
+"No Highlight
+nnoremap <leader>h :noh<CR>
+
 "Use CapsLock to exit
 au VimEnter * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 au VimLeave * silent! !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
+"FZF Ripgrep
+map <C-f> :FZF<CR>
+nnoremap <leader>s :Rg 
+nnoremap <leader>b :Buffers<CR>
+
+"NoH
+nnoremap <leader>h :noh<CR>

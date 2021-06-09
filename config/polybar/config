@@ -108,7 +108,7 @@ tray-position =
 [bar/top-secondary]
 inherit = bar/base
 
-modules-left = now-playing volume right-end-top left-end-bottom ping right-end-top
+modules-left = volume right-end-top left-end-bottom ping right-end-top
 modules-right = left-end-top wlan eth right-end-bottom left-end-top date right-end-bottom left-end-top
 
 tray-background = ${color.module-bg}
