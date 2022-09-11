@@ -96,7 +96,7 @@ local function config(_config)
 			nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end)
 			nnoremap("<leader>vrr", function() vim.lsp.buf.references() end)
 			nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
-			inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+			inoremap("<C-s>", function() vim.lsp.buf.signature_help() end)
 		end,
 	}, _config or {})
 end
