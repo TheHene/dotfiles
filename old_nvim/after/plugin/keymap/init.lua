@@ -3,8 +3,8 @@ local nnoremap = Remap.nnoremap
 local xnoremap = Remap.xnoremap
 
 -- Buffer switching
-nnoremap("<C-l>", ":bn<CR>")
-nnoremap("<C-h>", ":bp<CR>")
+nnoremap("<leader>l", ":bn<CR>")
+nnoremap("<leader>h", ":bp<CR>")
 nnoremap("<leader>bd", ":bd<CR>")
 
 -- Tab
